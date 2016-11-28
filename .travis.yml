@@ -1,22 +1,22 @@
 language: java
 jdk:
-  - oraclejdk8
+- oraclejdk8
 env:
-  - MODULE=core
-  - MODULE=core/java-lib
-  - MODULE=core/broadcaster
+- MODULE=core
+- MODULE=core/java-lib
+- MODULE=core/broadcaster
 before_install:
-  - cp config/settings.xml ~/.m2/settings.xml
-  - echo "MAVEN_OPTS='-Xmx1024m'" > ~/.mavenrc
+- cp config/settings.xml ~/.m2/settings.xml
+- echo "MAVEN_OPTS='-Xmx1024m'" > ~/.mavenrc
 script: cd $MODULE && mvn clean deploy
 deploy:
-  edge: true
   provider: cloudfoundry
-  username: $CF_DEPLOY_USERNAME
-  password: $CF_DEPLOY_PASSWORD
   api: https://api.run.pivotal.io
+  username: guidrouet@gmail.com
+  password:
+    secure: RE8snuhO5HKpV8RUPpVXP7KTaqSJb3DS4FSIzaCMy/+N54Uqvnk3ecFyXGJpgYSCRmiZEohP9hXSGYaRX2aXOQvnxtnRcH73X0J8c5T1o3gvLKUdlyZg2HIEMUu7x2pVekJqe300hlhi5Uxgm2MLjdFD74xhoN7USKnBdXOF/cyjyIomEr4HX8UCxMxjbgeAyGXvPyrH1bQbp6j9QdZy06zpMD0+MYzl66qYV4pgxeey/jyqh+ldAQOtXqXueIGG3PQr+zFQTX9Jnw7ilKvP9HqTAngt32GaccB+zCmMhmKFouodJzKtFnpGOQ6d82XgdKMcZcZfGK9zMI1ZDVLWrftfjap+8TFuHpiJbghj52bGrMAD0/+d14LxsSVj0NyuQ7a/7RwalfF9aZOs1CNrLO9KkKy+5ncUKv6dLZtBZ9bN9+bwdb3pfS78C7JaJQOkv6jjXYIJv/yssBla90gfXJY+htnax+5Owss391JYsjhKFtbYL9LhEe587t5lsz7tkOygRPQ+zARInmJt6DBc/rHdtLDMOdhEaA+MKt9Sfn2TZuTXKsu3/pbM95+061u3wmZl7jxqjhnfMhHn1JkD0CkmWxbKLbL9ELy99TvySjdaT+qVar5AXSpL3iyLX/APjFz0RA+1jO8kOlfYebFZYNwoClJG7oTw9XcUuePGb7Q=
   organization: Reactivity
   space: development
   on:
-    branch: issue4-sse-couchbase
-    condition: $MODULE = 'core/broadcaster'
+    repo: reactivity-io/reactivity
+    branch: travis-deploy
